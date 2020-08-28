@@ -20,7 +20,8 @@ public class SortByField {
         BEST_STRIKING_RATE_WITH_4AND5WICKET,
         BOWLING_AVERAGE_WITH_STRIKE_RATE,
         MAXIMUM_WICKET_WITH_BEST_BOWLING_AVERAGE,
-        BEST_AVERAGES_OF_BOTH
+        BEST_AVERAGES_OF_BOTH,
+        ALL_ROUNDER
     }
 
     public static Comparator getComparatorField(SortByField.Field field) {
@@ -49,6 +50,7 @@ public class SortByField {
         sortFieldComparator.put(Field.BOWLING_AVERAGE_WITH_STRIKE_RATE, iplAverageBowlingComparator.thenComparing(iplStrikeRateComparator).reversed());
         sortFieldComparator.put(Field.MAXIMUM_WICKET_WITH_BEST_BOWLING_AVERAGE, iplWicketComparator.thenComparing(iplAverageBowlingComparator).reversed());
         sortFieldComparator.put(Field.BEST_AVERAGES_OF_BOTH, iplAverageBattingComparator.thenComparing(iplAverageBowlingComparator).reversed());
+        sortFieldComparator.put(Field.ALL_ROUNDER, iplRunComparator.thenComparing(iplWicketComparator).reversed());
 
         return (Comparator<CricketLeagueDAO>) sortFieldComparator.get(field);
     }
