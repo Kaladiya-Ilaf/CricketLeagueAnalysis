@@ -73,4 +73,52 @@ public class CricketLeagueAnalyserTest {
         Assert.assertEquals(99, numOfRecords);
     }
 
+    @Test
+    public void givenIPLFactSheetMostWktsFile_whenWrongPath_shouldThrowCustomException() {
+        try {
+            CricketLeagueAnalyser cricketAnalyser = new CricketLeagueAnalyser();
+            ExpectedException expectedException = ExpectedException.none();
+            expectedException.expect(CricketLeagueAnalyserException.class);
+            cricketAnalyser.loadIPLFactSheetData(CricketLeagueAnalyser.PlayerType.BOWLER, WRONG_CSV_FILE_PATH);
+        } catch (CricketLeagueAnalyserException e) {
+            Assert.assertEquals(CricketLeagueAnalyserException.ExceptionType.INPUT_FILE_PROBLEM, e.type);
+        }
+    }
+
+    @Test
+    public void givenIPLFactSheetMostWktsFile_whenWrongFileType_shouldThrowCustomException() {
+        try {
+            CricketLeagueAnalyser cricketAnalyser = new CricketLeagueAnalyser();
+            ExpectedException expectedException = ExpectedException.none();
+            expectedException.expect(CricketLeagueAnalyserException.class);
+            cricketAnalyser.loadIPLFactSheetData(CricketLeagueAnalyser.PlayerType.BOWLER, WRONG_TYPE_FILE_PATH);
+        } catch (CricketLeagueAnalyserException e) {
+            Assert.assertEquals(CricketLeagueAnalyserException.ExceptionType.INPUT_FILE_PROBLEM, e.type);
+        }
+    }
+
+    @Test
+    public void givenIPLFactSheetMostWktsFile_whenWrongDelimiter_shouldThrowCustomException() {
+        try {
+            CricketLeagueAnalyser cricketAnalyser = new CricketLeagueAnalyser();
+            ExpectedException expectedException = ExpectedException.none();
+            expectedException.expect(CricketLeagueAnalyserException.class);
+            cricketAnalyser.loadIPLFactSheetData(CricketLeagueAnalyser.PlayerType.BOWLER, INCORRECT_DATA_CSV_FILE_PATH);
+        } catch (CricketLeagueAnalyserException e) {
+            Assert.assertEquals(CricketLeagueAnalyserException.ExceptionType.INCORRECT_DATA_PROBLEM, e.type);
+        }
+    }
+
+    @Test
+    public void givenIPLFactSheetMostWktsFile_whenWrongHeader_shouldThrowCustomException() {
+        try {
+            CricketLeagueAnalyser cricketAnalyser = new CricketLeagueAnalyser();
+            ExpectedException expectedException = ExpectedException.none();
+            expectedException.expect(CricketLeagueAnalyserException.class);
+            cricketAnalyser.loadIPLFactSheetData(CricketLeagueAnalyser.PlayerType.BOWLER, INCORRECT_DATA_CSV_FILE_PATH);
+        } catch (CricketLeagueAnalyserException e) {
+            Assert.assertEquals(CricketLeagueAnalyserException.ExceptionType.INCORRECT_DATA_PROBLEM, e.type);
+        }
+    }
+
 }
