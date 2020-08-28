@@ -11,6 +11,7 @@ public class SortByField {
         AVERAGE_OF_BATSMAN,
         STRIKE_RATE,
         SIX_AND_FOURS_WITH_STRIKE_RATE,
+        AVERAGE_WITH_BEST_STRIKE_RATE,
         SIX_AND_FOURS
     }
 
@@ -25,6 +26,7 @@ public class SortByField {
         sortFieldComparator.put(Field.STRIKE_RATE, iplStrikeRateComparator.reversed());
         sortFieldComparator.put(Field.SIX_AND_FOURS, iplSixComparator.thenComparing(iplFourComparator).reversed());
         sortFieldComparator.put(Field.SIX_AND_FOURS_WITH_STRIKE_RATE, iplStrikeRateComparator.thenComparing(iplSixComparator).thenComparing(iplFourComparator).reversed());
+        sortFieldComparator.put(Field.AVERAGE_WITH_BEST_STRIKE_RATE, iplAverageBattingComparator.thenComparing(iplStrikeRateComparator).reversed());
 
         return (Comparator<CricketLeagueDAO>) sortFieldComparator.get(field);
 
