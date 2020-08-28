@@ -42,6 +42,22 @@ public class IPLMostWicketsCSV {
     @CsvBindByName(column = "5w")
     public int fiveWicket;
 
+    public IPLMostWicketsCSV(){}
+
+    public IPLMostWicketsCSV(int position, String player, int runs, double bowlingAverage, int matches, double strikeRate, double economy, int fourWkt, int fiveWicket, int wickets) {
+        this.position = position;
+        this.player = player;
+        this.matches = matches;
+        this.runs = runs;
+        this.average = bowlingAverage;
+        this.matches = matches;
+        this.strikeRate = strikeRate;
+        this.economy = economy;
+        this.fourWkt = fourWkt;
+        this.fiveWicket = fiveWicket;
+        this.wickets = wickets;
+    }
+
     @Override
     public String toString() {
         return "IPLMostWicketsCSV{" +

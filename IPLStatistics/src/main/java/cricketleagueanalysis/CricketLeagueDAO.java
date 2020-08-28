@@ -39,4 +39,12 @@ public class CricketLeagueDAO {
         wickets = iplWicketCsv.wickets;
     }
 
+    public CricketLeagueDAO() {
+    }
+
+    public Object getCricketDTO(CricketLeagueAnalyser.PlayerType playerType) {
+        if (playerType.equals(CricketLeagueAnalyser.PlayerType.BATSMAN))
+            return new IPLMostRunsCSV(position, player, matches, runs, strikeRate, sixes, batsManAverage, fours);
+        return new IPLMostWicketsCSV(position, player, runs, bowlingAverage, matches, strikeRate, economy, fourWkt, fiveWicket, wickets);
+    }
 }
