@@ -132,5 +132,33 @@ public class CricketLeagueAnalyserTest {
 
     }
 
+    @Test
+    public void givenIPLFactSheetMostRunsFile_whenSortedOnStrikingRateOfBatsman_shouldReturnSortedResult() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        cricketLeagueAnalyser.loadIPLFactSheetData(CricketLeagueAnalyser.PlayerType.BATSMAN, CRICKET_LEAGUE_RUNS_CSV_FILE_PATH);
+        String playerWiseSortedData = cricketLeagueAnalyser.getFieldWiseSortedPlayersData(CricketLeagueAnalyser.PlayerType.BATSMAN, SortByField.Field.STRIKE_RATE);
+        IPLMostRunsCSV[] cricketCSV = new Gson().fromJson(playerWiseSortedData, IPLMostRunsCSV[].class);
+        Assert.assertEquals("Ishant Sharma", cricketCSV[0].player);
+    }
 
+    @Test
+    public void givenIPLFactSheetMostRunsFile_whenSortedOn6sAnd4s_shouldReturnSortedResult() throws CricketLeagueAnalyserException {
+            CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadIPLFactSheetData(CricketLeagueAnalyser.PlayerType.BATSMAN, CRICKET_LEAGUE_RUNS_CSV_FILE_PATH);
+            String playerWiseSortedData = cricketLeagueAnalyser.getFieldWiseSortedPlayersData(CricketLeagueAnalyser.PlayerType.BATSMAN, SortByField.Field.SIX_AND_FOURS);
+            IPLMostRunsCSV[] cricketCSV = new Gson().fromJson(playerWiseSortedData, IPLMostRunsCSV[].class);
+            Assert.assertEquals("Andre Russell", cricketCSV[0].player);
+    }
+
+    @Test
+    public void givenIPLFactSheetMostRunsFile_whenSortedOnStrikingRateAnd6sAnd4s_shouldReturnSortedResult() {
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadIPLFactSheetData(CricketLeagueAnalyser.PlayerType.BATSMAN, CRICKET_LEAGUE_RUNS_CSV_FILE_PATH);
+            String playerWiseSortedData = cricketLeagueAnalyser.getFieldWiseSortedPlayersData(CricketLeagueAnalyser.PlayerType.BATSMAN, SortByField.Field.SIX_AND_FOURS_WITH_STRIKE_RATE);
+            IPLMostRunsCSV[] cricketCSV = new Gson().fromJson(playerWiseSortedData, IPLMostRunsCSV[].class);
+            Assert.assertEquals("Ishant Sharma", cricketCSV[0].player);
+        } catch (CricketLeagueAnalyserException e) {
+        }
+    }
 }
