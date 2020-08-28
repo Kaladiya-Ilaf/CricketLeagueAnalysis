@@ -17,7 +17,10 @@ public class SortByField {
         BOWLING_STRIKE_RATE,
         SIX_AND_FOURS,
         ECONOMY_RATE,
-        BEST_STRIKING_RATE_WITH_4AND5WICKET
+        BEST_STRIKING_RATE_WITH_4AND5WICKET,
+        BOWLING_AVERAGE_WITH_STRIKE_RATE,
+        MAXIMUM_WICKET_WITH_BEST_BOWLING_AVERAGE,
+        BEST_AVERAGES_OF_BOTH
     }
 
     public static Comparator getComparatorField(SortByField.Field field) {
@@ -31,6 +34,7 @@ public class SortByField {
         Comparator<CricketLeagueDAO> iplEconomyRateComparator = Comparator.comparing(census -> census.economy);
         Comparator<CricketLeagueDAO> ipl4WicketComparator = Comparator.comparing(census -> (census.fourWkt * 4));
         Comparator<CricketLeagueDAO> ipl5WicketComparator = Comparator.comparing(census -> (census.fiveWicket * 5));
+        Comparator<CricketLeagueDAO> iplWicketComparator = Comparator.comparing(census -> census.wickets);
 
         sortFieldComparator.put(Field.AVERAGE_OF_BATSMAN, iplAverageBattingComparator.reversed());
         sortFieldComparator.put(Field.BATTING_STRIKE_RATE, iplStrikeRateComparator.reversed());
@@ -42,6 +46,9 @@ public class SortByField {
         sortFieldComparator.put(Field.BOWLING_STRIKE_RATE, iplBowlerStrikeRateComparator.reversed());
         sortFieldComparator.put(Field.ECONOMY_RATE, iplEconomyRateComparator.reversed());
         sortFieldComparator.put(Field.BEST_STRIKING_RATE_WITH_4AND5WICKET, iplStrikeRateComparator.thenComparing(ipl4WicketComparator).thenComparing(ipl5WicketComparator).reversed());
+        sortFieldComparator.put(Field.BOWLING_AVERAGE_WITH_STRIKE_RATE, iplAverageBowlingComparator.thenComparing(iplStrikeRateComparator).reversed());
+        sortFieldComparator.put(Field.MAXIMUM_WICKET_WITH_BEST_BOWLING_AVERAGE, iplWicketComparator.thenComparing(iplAverageBowlingComparator).reversed());
+        sortFieldComparator.put(Field.BEST_AVERAGES_OF_BOTH, iplAverageBattingComparator.thenComparing(iplAverageBowlingComparator).reversed());
 
         return (Comparator<CricketLeagueDAO>) sortFieldComparator.get(field);
     }

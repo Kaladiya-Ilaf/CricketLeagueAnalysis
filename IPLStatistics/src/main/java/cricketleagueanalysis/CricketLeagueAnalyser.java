@@ -10,7 +10,7 @@ import java.util.Map;
 import static java.util.stream.Collectors.toCollection;
 
 public class CricketLeagueAnalyser {
-    public enum PlayerType{ BATSMAN, BOWLER };
+    public enum PlayerType{ BATSMAN, BOWLER, BOTH };
 
     Map<String, CricketLeagueDAO> cricketLeagueMap = null;
 
