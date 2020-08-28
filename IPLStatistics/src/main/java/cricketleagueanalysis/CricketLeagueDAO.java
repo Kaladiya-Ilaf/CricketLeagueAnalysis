@@ -9,6 +9,7 @@ public class CricketLeagueDAO {
     public double batsManAverage;
     public double bowlingAverage;
     public double strikeRate;
+    public double bowlingStrikeRate;
     public int fours;
     public double economy;
     public int fourWkt;
@@ -31,7 +32,7 @@ public class CricketLeagueDAO {
         player = iplWicketCsv.player;
         matches = iplWicketCsv.matches;
         runs = iplWicketCsv.runs;
-        strikeRate = iplWicketCsv.strikeRate;
+        bowlingStrikeRate = iplWicketCsv.strikeRate;
         bowlingAverage = iplWicketCsv.average;
         economy = iplWicketCsv.economy;
         fiveWicket = iplWicketCsv.fiveWicket;
