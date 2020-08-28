@@ -12,6 +12,7 @@ public class SortByField {
         STRIKE_RATE,
         SIX_AND_FOURS_WITH_STRIKE_RATE,
         AVERAGE_WITH_BEST_STRIKE_RATE,
+        MAXIMUM_RUNS_WITH_BEST_AVERAGES,
         SIX_AND_FOURS
     }
 
@@ -20,15 +21,15 @@ public class SortByField {
         Comparator<CricketLeagueDAO> iplStrikeRateComparator = Comparator.comparing(census -> census.strikeRate);
         Comparator<CricketLeagueDAO> iplSixComparator = Comparator.comparing(census -> (census.sixes * 6));
         Comparator<CricketLeagueDAO> iplFourComparator = Comparator.comparing(census -> (census.fours * 4));
-
+        Comparator<CricketLeagueDAO> iplRunComparator = Comparator.comparing(census -> census.runs);
 
         sortFieldComparator.put(Field.AVERAGE_OF_BATSMAN, iplAverageBattingComparator.reversed());
         sortFieldComparator.put(Field.STRIKE_RATE, iplStrikeRateComparator.reversed());
         sortFieldComparator.put(Field.SIX_AND_FOURS, iplSixComparator.thenComparing(iplFourComparator).reversed());
         sortFieldComparator.put(Field.SIX_AND_FOURS_WITH_STRIKE_RATE, iplStrikeRateComparator.thenComparing(iplSixComparator).thenComparing(iplFourComparator).reversed());
         sortFieldComparator.put(Field.AVERAGE_WITH_BEST_STRIKE_RATE, iplAverageBattingComparator.thenComparing(iplStrikeRateComparator).reversed());
+        sortFieldComparator.put(Field.MAXIMUM_RUNS_WITH_BEST_AVERAGES, iplRunComparator.thenComparing(iplAverageBattingComparator).reversed());
 
         return (Comparator<CricketLeagueDAO>) sortFieldComparator.get(field);
-
     }
 }
