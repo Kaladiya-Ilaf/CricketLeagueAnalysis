@@ -194,4 +194,24 @@ public class CricketLeagueAnalyserTest {
         IPLMostRunsCSV[] cricketCSV = new Gson().fromJson(playerWiseSortedData, IPLMostRunsCSV[].class);
         Assert.assertEquals("Krishnappa Gowtham", cricketCSV[0].player);
     }
+
+    @Test
+    public void givenIPLFactSheetMostWktsFile_whenSortedOnEconomyRate_shouldReturnSortedResult() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        cricketLeagueAnalyser.loadIPLFactSheetData(CricketLeagueAnalyser.PlayerType.BOWLER, CRICKET_LEAGUE_WICKETS_CSV_FILE_PATH);
+        String playerWiseSortedData = cricketLeagueAnalyser.getFieldWiseSortedPlayersData(CricketLeagueAnalyser.PlayerType.BOWLER, SortByField.Field.ECONOMY_RATE);
+        IPLMostRunsCSV[] cricketCSV = new Gson().fromJson(playerWiseSortedData, IPLMostRunsCSV[].class);
+        Assert.assertEquals("Ben Cutting", cricketCSV[0].player);
+    }
+
+    @Test
+    public void givenIPLFactSheetMostWktsFile_whenSortedOnvStrikingRateAnd5And4Wickets_shouldReturnSortedResult() throws CricketLeagueAnalyserException {
+            CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadIPLFactSheetData(CricketLeagueAnalyser.PlayerType.BOWLER, CRICKET_LEAGUE_WICKETS_CSV_FILE_PATH);
+            String playerWiseSortedData = cricketLeagueAnalyser.getFieldWiseSortedPlayersData(CricketLeagueAnalyser.PlayerType.BOWLER, SortByField.Field.BEST_STRIKING_RATE_WITH_4AND5WICKET);
+            IPLMostRunsCSV[] cricketCSV = new Gson().fromJson(playerWiseSortedData, IPLMostRunsCSV[].class);
+            Assert.assertEquals("Alzarri Joseph", cricketCSV[0].player);
+    }
+
+
 }

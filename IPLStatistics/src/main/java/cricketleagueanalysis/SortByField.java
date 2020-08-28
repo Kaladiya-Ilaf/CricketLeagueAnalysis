@@ -15,7 +15,9 @@ public class SortByField {
         MAXIMUM_RUNS_WITH_BEST_AVERAGES,
         AVERAGE_OF_BOWLING,
         BOWLING_STRIKE_RATE,
-        SIX_AND_FOURS
+        SIX_AND_FOURS,
+        ECONOMY_RATE,
+        BEST_STRIKING_RATE_WITH_4AND5WICKET
     }
 
     public static Comparator getComparatorField(SortByField.Field field) {
@@ -26,6 +28,9 @@ public class SortByField {
         Comparator<CricketLeagueDAO> iplRunComparator = Comparator.comparing(census -> census.runs);
         Comparator<CricketLeagueDAO> iplAverageBowlingComparator = Comparator.comparing(census -> census.bowlingAverage);
         Comparator<CricketLeagueDAO> iplBowlerStrikeRateComparator = Comparator.comparing(census -> census.bowlingStrikeRate);
+        Comparator<CricketLeagueDAO> iplEconomyRateComparator = Comparator.comparing(census -> census.economy);
+        Comparator<CricketLeagueDAO> ipl4WicketComparator = Comparator.comparing(census -> (census.fourWkt * 4));
+        Comparator<CricketLeagueDAO> ipl5WicketComparator = Comparator.comparing(census -> (census.fiveWicket * 5));
 
         sortFieldComparator.put(Field.AVERAGE_OF_BATSMAN, iplAverageBattingComparator.reversed());
         sortFieldComparator.put(Field.BATTING_STRIKE_RATE, iplStrikeRateComparator.reversed());
@@ -35,6 +40,8 @@ public class SortByField {
         sortFieldComparator.put(Field.MAXIMUM_RUNS_WITH_BEST_AVERAGES, iplRunComparator.thenComparing(iplAverageBattingComparator).reversed());
         sortFieldComparator.put(Field.AVERAGE_OF_BOWLING, iplAverageBowlingComparator.reversed());
         sortFieldComparator.put(Field.BOWLING_STRIKE_RATE, iplBowlerStrikeRateComparator.reversed());
+        sortFieldComparator.put(Field.ECONOMY_RATE, iplEconomyRateComparator.reversed());
+        sortFieldComparator.put(Field.BEST_STRIKING_RATE_WITH_4AND5WICKET, iplStrikeRateComparator.thenComparing(ipl4WicketComparator).thenComparing(ipl5WicketComparator).reversed());
 
         return (Comparator<CricketLeagueDAO>) sortFieldComparator.get(field);
     }
