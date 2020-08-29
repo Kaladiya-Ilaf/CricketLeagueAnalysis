@@ -16,6 +16,7 @@ public class CricketLeagueDAO {
     public int fiveWicket;
     public int wickets;
     public int hundreds;
+    public int fifties;
 
     public CricketLeagueDAO(IPLMostRunsCSV iplRunsCsv) {
         position = iplRunsCsv.position;
@@ -27,6 +28,7 @@ public class CricketLeagueDAO {
         batsManAverage = iplRunsCsv.average;
         fours = iplRunsCsv.fours;
         hundreds = iplRunsCsv.hundreds;
+        fifties = iplRunsCsv.fiftys;
     }
 
     public CricketLeagueDAO(IPLMostWicketsCSV iplWicketCsv) {
