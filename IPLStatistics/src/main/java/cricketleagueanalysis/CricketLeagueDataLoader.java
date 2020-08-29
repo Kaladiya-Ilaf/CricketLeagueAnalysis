@@ -3,7 +3,6 @@ package cricketleagueanalysis;
 import csvbuilder.CSVBuilderException;
 import csvbuilder.CSVBuilderFactory;
 import csvbuilder.ICSVBuilder;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -29,6 +28,7 @@ public class CricketLeagueDataLoader {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator<E> cricketCSVIterator = csvBuilder.getCSVFileIterator(reader, cricketCSVClass);
             Iterable<E> cricketCSVIterable = () -> cricketCSVIterator;
+
             if(cricketCSVClass.getName().equals("cricketleagueanalysis.IPLMostRunsCSV")){
                 StreamSupport.stream(cricketCSVIterable.spliterator(), false)
                         .map(IPLMostRunsCSV.class::cast)
@@ -38,9 +38,11 @@ public class CricketLeagueDataLoader {
                         .map(IPLMostWicketsCSV.class::cast)
                         .forEach(cricketCSV -> cricketLeagueMap.put(cricketCSV.player, new CricketLeagueDAO(cricketCSV)));
             }
+
             if (csvFilePath.length == 1) {
                 return cricketLeagueMap;
             }
+
             this.loadFactSheetData(cricketLeagueMap, csvFilePath[1]);
             return cricketLeagueMap;
         } catch (IOException e) {

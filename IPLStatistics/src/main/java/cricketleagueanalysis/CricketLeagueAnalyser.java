@@ -30,7 +30,8 @@ public class CricketLeagueAnalyser {
             throw new CricketLeagueAnalyserException("NO_PLAYER_DATA", CricketLeagueAnalyserException.ExceptionType.NO_PLAYER_DATA);
 
         cricketComparator = SortByField.getComparatorField(field[0]);
-        ArrayList censusDTOS = cricketLeagueMap.values().stream()
+        ArrayList censusDTOS = cricketLeagueMap.values()
+                .stream()
                 .sorted(cricketComparator)
                 .map(cricketDAO -> cricketDAO.getCricketDTO(playerType))
                 .collect(toCollection(ArrayList::new));
