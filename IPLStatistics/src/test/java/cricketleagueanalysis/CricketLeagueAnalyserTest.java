@@ -30,6 +30,12 @@ public class CricketLeagueAnalyserTest {
     }
 
     @Test
+    public void givenIPLFactSheetMostRunsFile_whenProper_shouldReturnIncorrectRecordCount() throws CricketLeagueAnalyserException {
+        int numOfRecords = cricketAnalyser.loadIPLFactSheetData(CricketLeagueAnalyser.PlayerType.BATSMAN, CRICKET_LEAGUE_RUNS_CSV_FILE_PATH);
+        Assert.assertNotEquals(95, numOfRecords);
+    }
+
+    @Test
     public void givenIPLFactSheetMostRunsFile_whenWrongPath_shouldThrowCustomException() {
         try {
             cricketAnalyser.loadIPLFactSheetData(CricketLeagueAnalyser.PlayerType.BATSMAN, WRONG_CSV_FILE_PATH);
@@ -69,6 +75,12 @@ public class CricketLeagueAnalyserTest {
     public void givenIPLFactSheetMostWktsFile_whenProper_shouldReturnCorrectRecordCount() throws CricketLeagueAnalyserException {
         int numOfRecords = cricketAnalyser.loadIPLFactSheetData(CricketLeagueAnalyser.PlayerType.BOWLER, CRICKET_LEAGUE_WICKETS_CSV_FILE_PATH);
         Assert.assertEquals(99, numOfRecords);
+    }
+
+    @Test
+    public void givenIPLFactSheetMostWktsFile_whenProper_shouldReturnIncorrectRecordCount() throws CricketLeagueAnalyserException {
+        int numOfRecords = cricketAnalyser.loadIPLFactSheetData(CricketLeagueAnalyser.PlayerType.BOWLER, CRICKET_LEAGUE_WICKETS_CSV_FILE_PATH);
+        Assert.assertNotEquals(59, numOfRecords);
     }
 
     @Test
