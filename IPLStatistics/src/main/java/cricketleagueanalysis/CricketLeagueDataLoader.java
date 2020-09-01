@@ -22,8 +22,10 @@ public class CricketLeagueDataLoader {
             return this.loadIPLFactSheetData(IPLMostRunsCSV.class, csvFilePath);
         else throw new CricketLeagueAnalyserException("Incorrect player type", CricketLeagueAnalyserException.ExceptionType.INVALID_PLAYER);
     }
+
     private <E> Map<String, CricketLeagueDAO> loadIPLFactSheetData(Class<E> cricketCSVClass, String... csvFilePath) throws CricketLeagueAnalyserException {
         Map<String, CricketLeagueDAO> cricketLeagueMap = new HashMap<>();
+
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath[0]))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator<E> cricketCSVIterator = csvBuilder.getCSVFileIterator(reader, cricketCSVClass);
@@ -69,6 +71,4 @@ public class CricketLeagueDataLoader {
             throw new CricketLeagueAnalyserException(e.getMessage(), e.type.name());
         }
     }
-
-
 }

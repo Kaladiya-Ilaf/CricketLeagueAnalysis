@@ -5,7 +5,7 @@ public class CricketLeagueAnalyserException extends Throwable {
         INPUT_FILE_PROBLEM,
         INCORRECT_DATA_PROBLEM,
         INVALID_PLAYER,
-        NO_PLAYER_DATA;
+        NO_PLAYER_DATA
     }
 
     ExceptionType type;

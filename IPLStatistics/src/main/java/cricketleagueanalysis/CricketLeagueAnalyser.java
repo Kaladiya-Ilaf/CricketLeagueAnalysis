@@ -11,9 +11,10 @@ public class CricketLeagueAnalyser {
     public enum PlayerType{
         BATSMAN,
         BOWLER,
-        BOTH };
+        BOTH
+    }
 
-    Map<String, CricketLeagueDAO> cricketLeagueMap = null;
+    Map<String, CricketLeagueDAO> cricketLeagueMap;
 
     public CricketLeagueAnalyser() {
         cricketLeagueMap = new HashMap<String, CricketLeagueDAO>();
